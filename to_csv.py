@@ -6,6 +6,7 @@ import atexit
 import argparse
 import pandas as pd
 from utils.fnam_col import f2c
+from utils.pdkit import df_contains
 
 EVENTS = {
   'NO_ENCODING':     { 'msg': 'has no encoding. Using raw values.' },
@@ -38,6 +39,9 @@ if args.log != sys.stderr:
 responses      = pd.read_csv(args.input_dir + f'/version{args.version}.csv') #many of these need to be float (so they can include nan), some need to be object (because they can be non-integer)
 response_meta  = pd.read_csv(args.input_dir + f'/version{args.version}__field_encoding.csv', index_col = ['FIELD_NAME', 'CODE']) #NB CODE has to be an Object because it can be 'V'
 field_meta     = pd.read_csv(args.input_dir + f'/version{args.version}__field_attributes.csv', index_col = 'FIELD_NAME')
+
+#check for reserved strings (by regexp)
+if df_contains(responses, '^UNDECODABLE: '): raise Exception()
 
 #Commented out for now -- written on the assumption that we use FIELD_NUM for the index, but right now I am using FIELD_NAME for the index
 #Confirm that FIELD_NAME matches FIELD_NUM

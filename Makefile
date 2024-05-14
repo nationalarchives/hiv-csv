@@ -36,7 +36,7 @@ output:
 output/LOG: | output
 	mkdir output/LOG
 
-to_csv.py: utils/fnam_col.py
+to_csv.py: utils/fnam_col.py utils/pdkit.py
 
 #This is just a trick so that I can write e.g. 'make 1' instead of 'make output/version1.csv'
 .SECONDEXPANSION:
