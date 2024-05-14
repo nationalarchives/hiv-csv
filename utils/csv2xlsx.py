@@ -4,6 +4,7 @@ import sys
 import pandas as pd
 import collections
 from pathlib import Path
+from pdkit import df_contains
 
 def dfs2xlsx(sheets, output, engine_kwargs = {}, to_excel_kwargs = {}):
   if not isinstance(sheets, dict):
@@ -17,6 +18,7 @@ def dfs2xlsx(sheets, output, engine_kwargs = {}, to_excel_kwargs = {}):
   with pd.ExcelWriter(output, **engine_kwargs) as writer:
     for name, df in sheets.items():
       assert isinstance(df, pd.DataFrame), f'Variable "df" has non-DataFrame type {type(df)} with value {df}'
+      if 'na_rep' in to_excel_kwargs: assert not df_contains(df, to_excel_kwargs['na_rep'])
       df.to_excel(writer, sheet_name = name, **to_excel_kwargs)
 
 def csvs2xslx(csvs, output, engine_kwargs, to_excel_kwargs):
@@ -38,6 +40,7 @@ if __name__ == '__main__':
   parser.add_argument('--output', '-o',
                       default = 'output.xlsx',
                       help = 'Filename for output spreadsheet')
+  parser.add_argument('--na-rep', default = '')
   args = parser.parse_args()
   engine_kwargs = {
     'mode': 'w',
@@ -45,5 +48,6 @@ if __name__ == '__main__':
   }
   to_excel_kwargs = {
     'index': None,
+    'na_rep': args.na_rep,
   }
   csvs2xslx(args.csvs, args.output, engine_kwargs, to_excel_kwargs)
