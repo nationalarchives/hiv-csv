@@ -40,6 +40,8 @@ if __name__ == '__main__':
   parser.add_argument('--output', '-o',
                       default = 'output.xlsx',
                       help = 'Filename for output spreadsheet')
+  parser.add_argument('--freeze-row', default = 0, type = int)
+  parser.add_argument('--freeze-col', default = 0, type = int)
   parser.add_argument('--na-rep', default = '')
   args = parser.parse_args()
   engine_kwargs = {
@@ -48,6 +50,7 @@ if __name__ == '__main__':
   }
   to_excel_kwargs = {
     'index': None,
+    'freeze_panes': (args.freeze_row, args.freeze_col),
     'na_rep': args.na_rep,
   }
   csvs2xslx(args.csvs, args.output, engine_kwargs, to_excel_kwargs)
