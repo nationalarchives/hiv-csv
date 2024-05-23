@@ -1,0 +1,217 @@
+# Always give answers in order that they appeared in the questionnaire
+# If an equivalent answer exists in the base version of a question, just give the key of that answer with no value
+# If an equivalent answer exists in the base version of a question, but the text has changed, give the key of that answer and the new text
+---
+types:
+  disease_awareness: "Q1 - Q9"
+
+
+cards:
+  A:
+    answers:
+      A: "Legionnaires Disease"
+      B: "Herpes"
+      C: "Typhoid"
+      D: "Chicken Pox"
+      E: "AIDS"
+      F: "Flu"
+      G: "Hepatitis"
+      H: "Syphilis"
+  16:
+    A:
+      answers:
+        A:
+        I: "Rabies"
+        J: "Lung Cancer"
+        K: "Alcoholism"
+        E:
+        H:
+        G:
+        L: "Drug Addiction"
+
+
+Q1:
+  question: "What would you say are the most serious diseases and infections that might affect the health of the people in this country nowadays?"
+  method:
+    type: "open question"
+  start: 10
+  # stop:  20
+  answers:
+    A: "AIDS"
+    B: "Cancer"
+    C: "Chicken Pox"
+    D: "Flu"
+    E: "Herpes"
+    F: "Hepatitis"
+    G: "Legionnaires Disease"
+    H: "Syphilis"
+    I: "Typhoid"
+    J: "Other (CODE AND STATE)"
+    K: "Don't know"
+  16:
+    # stop: 23
+    answers:
+      A:
+      B:
+      C:
+      D:
+      E:
+      L: "Hepatitis A"
+      M: "Hepatitis B"
+      N: "Hepatitis (unspecified)"
+      G:
+      H:
+      I:
+      O: "Heart Disease"
+      J:
+      K:
+
+Q2:
+  question: "Here's a set of cards, each naming a particular disease. I'd like you to look through them and sort out the ones you haven't heard of before. Just give me the number on the cards showing diseases you have not heard of."
+  method:
+    type: "card"
+    subtype: "elimination"
+    set: A
+
+Q3:
+  question: "Now could you sort those you have heard of to show how common or rare they are in Britain today?"
+  method:
+    type: "card"
+    subtype: "sort"
+    set: A
+
+Q4:
+  question: "Now could you sort them again in terms of how serious it would be for someone who caught each disease?"
+  method:
+    type: "card"
+    subtype: "sort"
+    set: A
+
+Q5:
+  question: "Could you sort the cards onto this board to show how much you feel you personally know about each disease?"
+  method:
+    type: "card"
+    subtype: "board"  # implies "code in grid n" prefix?
+    set: A
+
+Q6:
+  question: "Now of all these diseases you've heard of, could you sort out three which you feel offer the most serious threat to the health of this country?"
+  method:
+    type: "card"
+    subtype: "select 3"
+    set: A
+    subquestions:
+      - 'Of these three diseases which one do you feel poses the greatest threat to the health of this country?'
+      - 'Of these three diseases which one do you feel poses the second greatest threat to the health of this country?'
+      - 'Of these three diseases which one do you feel poses the third greatest threat to the health of this country?'
+
+Q7:
+  question: "Now, thinking about all the diseases you have heard of are there any about which you think a lot of conflicting advice is given nowadays, which confuses people? You may mention as many, or as few, as you like."
+  method:
+    type: "card"
+    subtype: "board_none_dontknow"
+    set: A
+
+Q8:
+  question: "Thinking now of you personally and your own personal way of life, which of these diseases worry you that you might catch them; Which others?"
+  method:
+    type: "card"
+    subtype: "board_none_dontknow"
+    set: A
+
+Q9:
+  question: "And which one of these are you personally most concerned about as a danger to your own health?"
+  method:
+    type: "card"
+    subtype: "select 1"
+    set: A
+
+Q10:
+  branch:
+    condition: 'IF NEVER HEARD OF "AIDS" (NUMBER 5)'
+    target: "Q34"
+  question: "The rest of this questionnaire is about one of these diseases, AIDS. As far as you know, what are the main ways of catching AIDS? What other ways?"
+  method:
+    type: "open question"
+    subtype:
+      - "no prompt"
+      - "specify if necessary"
+  answers:
+    A: "Mentions of Sexual contact (SPECIFY IF NECESSARY)"
+    B: "Mentions of Blood (SPECIFY IF NECESSARY)"
+    C: "Mentions of Saliva/Kissing etc. (SPECIFY IF NECESSARY)"
+    D: "Mentions of other Personal contact (SPECIFY IF NECESSARY)"
+    E: "Mentions of Objects (SPECIFY IF NECESSARY)"
+    F: "Other (CODE AND STATE)"
+    G: "Don't know"
+    H: "Injections/Injecting drugs"
+    I: "Inherited/Baby from mother"
+  16:
+    branch:
+      condition: 'IF NEVER HEARD OF "AIDS" (NO 5) at Q.2.'
+      target: "Q50"
+    question: "The rest of this questionnaire is about one of these diseases, AIDS. As far as you know, how do people catch AIDS? How else?"
+    method:
+      subtype:
+        - "no prompt"
+        - "write in"
+    answers:
+      J: "Homosexual sex (anal intercourse)"
+      K: "Sex (unspecified)/sexual contact"
+      L: "Mentions of blood (unspecified)/cuts"
+      C: "Mentions of saliva/kissing etc."
+      M: "Mentions of semen"
+      N: "Blood transfusions"
+      H: "Injections/injecting drugs/dirty needles"
+      I: "Inherited/babies from mothers"
+      O: "Toilet seats/loos"
+      P: "Body fluids"
+      Q: "Oral sex/sucking"
+      R: "Mentions of promiscuity/having sex with lots of different people/sleeping around"
+      F: "Others"
+      G:
+      S: "Sex with infected person/carrier of AIDS virus"
+
+Q11:
+  question: "As far as you know, what sorts of people run the greatest risk of catching AIDS? What other sorts of people?"
+  method:
+    type: "open question"
+    subtype:
+      - "no prompt"
+      - "specify if necessary"
+  answers:
+    A: "Mentions of medical staff (Doctors Nurses etc.) (SPECIFY IF NECESSARY)"
+    B: "Mentions of Homosexuals (SPECIFY IF NECESSARY)"
+    C: "Haemophiliacs"
+    D: "(Other) People who need Blood Transfusions (SPECIFY IF NECESSARY)"
+    E: "People who have sex with lots of people (SPECIFY IF NECESSARY)"
+    F: "Others (CODE AND STATE)"
+    G: "Don't know"
+    H: "Bisexuals"
+    I: "Drug addicts/Users/Junkies"
+    J: "Inherited/Baby from mother"
+  16:
+    question: "As far as you know, which people run the greatest risk of catching AIDS? What other people?"
+    method:
+      subtype:
+        - "no prompt"
+        - "write in"
+    answers:
+      A: "Medical staff (doctors, nurses etc.)"
+      K: "Homosexuals/gays (unspecified)"
+      L: "Promiscuous homosexuals/gays/sleep around/sex with lots of people"
+      C:
+      D: "People who need blood transfusions/receive blood"
+      E: "People who have sex with a lot of people/promiscuous people/prostitutes"
+      I: "Injecting drug users/drug addicts"
+      H:
+      J: "Inherited/babies from mothers"
+      M: "Ethnic minorities/Haitians/Black people"
+      N: "People who have anal intercourse"
+      O: "Young people"
+      P: "Everybody/anybody who is sexually active"
+      Q: "Everybody/anybody (general)"
+      F: "Others"
+      G:
+      R: "People who have HTLV3 virus"
+      S: "Lesbians"
