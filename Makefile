@@ -20,7 +20,7 @@ clean:
 #This involved line is saying that we must create every CSV file before creating the Excel file
 #The $^ bit just repeats everything to the right of the colon
 #$@ is the thing to the left of the colon
-output/hiv_survey.xlsx: utils/csv2xlsx.py $(patsubst %,output/version%.csv,$(VERSIONS))
+output/hiv_survey.xlsx: utils/csv2xlsx.py data/index.csv $(patsubst %,output/version%.csv,$(VERSIONS))
 	python3 $^ -o $@ --freeze-row 1 --na-rep BLANK
 
 #The % here is a placeholder for a number
