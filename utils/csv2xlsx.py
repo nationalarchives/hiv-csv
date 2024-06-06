@@ -43,6 +43,7 @@ if __name__ == '__main__':
   parser.add_argument('--freeze-row', default = 0, type = int)
   parser.add_argument('--freeze-col', default = 0, type = int)
   parser.add_argument('--na-rep', default = '')
+  parser.add_argument('--float-format', default = None, type = str)
   args = parser.parse_args()
   engine_kwargs = {
     'mode': 'w',
@@ -53,4 +54,5 @@ if __name__ == '__main__':
     'freeze_panes': (args.freeze_row, args.freeze_col),
     'na_rep': args.na_rep,
   }
+  if not args.float_format is None: to_excel_kwargs['float_format'] = args.float_format
   csvs2xslx(args.csvs, args.output, engine_kwargs, to_excel_kwargs)
