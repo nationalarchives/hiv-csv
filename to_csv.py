@@ -27,7 +27,8 @@ parser.add_argument('version',
                     type = int,
                     help = 'Version number to process')
 parser.add_argument('--input_dir',
-                    default = f'{os.path.dirname(sys.argv[0])}/BN-97-1',
+                    default = f'{os.path.dirname(sys.argv[0])}/BN-97-1' if len(os.path.dirname(sys.argv[0])) else './BN-97-1',
+
                     help = 'Location of BN-97-1 data files')
 parser.add_argument('--log',
                     type = argparse.FileType('w'),
