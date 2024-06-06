@@ -21,13 +21,13 @@ def dfs2xlsx(sheets, output, engine_kwargs = {}, to_excel_kwargs = {}):
       if 'na_rep' in to_excel_kwargs: assert not df_contains(df, to_excel_kwargs['na_rep'])
       df.to_excel(writer, sheet_name = name, **to_excel_kwargs)
 
-def csvs2xslx(csvs, output, engine_kwargs, to_excel_kwargs):
+def csvs2xslx(csvs, output, csv_kwargs, engine_kwargs, to_excel_kwargs):
   if isinstance(csvs, str):
     csvs = [csvs]
   elif not isinstance(csvs, collections.abc.Sequence):
     print(f'csvs is neither str nor sequence', file = sys.stderr)
     sys.exit(1)
-  dfs2xlsx({Path(x).stem: pd.read_csv(x) for x in csvs}, output, engine_kwargs, to_excel_kwargs)
+  dfs2xlsx({Path(x).stem: pd.read_csv(x, **csv_kwargs) for x in csvs}, output, engine_kwargs, to_excel_kwargs)
 
 
 if __name__ == '__main__':
@@ -43,6 +43,7 @@ if __name__ == '__main__':
   parser.add_argument('--freeze-row', default = 0, type = int)
   parser.add_argument('--freeze-col', default = 0, type = int)
   parser.add_argument('--na-rep', default = None)
+  parser.add_argument('--index-col', default = None, type = int)
   parser.add_argument('--float-format', default = None, type = str)
   args = parser.parse_args()
   engine_kwargs = {
@@ -53,6 +54,10 @@ if __name__ == '__main__':
     'index': None,
     'freeze_panes': (args.freeze_row, args.freeze_col),
   }
+  csv_kwargs = {}
   if not args.na_rep is None: to_excel_kwargs['na_rep'] = args.na_rep
   if not args.float_format is None: to_excel_kwargs['float_format'] = args.float_format
-  csvs2xslx(args.csvs, args.output, engine_kwargs, to_excel_kwargs)
+  if not args.index_col is None:
+    csv_kwargs['index_col'] = args.index_col
+    to_excel_kwargs['index'] = True
+  csvs2xslx(args.csvs, args.output, csv_kwargs, engine_kwargs, to_excel_kwargs)
