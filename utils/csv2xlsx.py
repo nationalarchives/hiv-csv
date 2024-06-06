@@ -2,9 +2,20 @@
 
 import sys
 import pandas as pd
+import openpyxl
 import collections
 from pathlib import Path
 from pdkit import df_contains
+
+def fit_text(excel_fnam):
+  wb = openpyxl.load_workbook(excel_fnam)
+  for ws in wb:
+    for cell in ws[1]:
+      ws.column_dimensions[openpyxl.utils.get_column_letter(cell.column)].bestFit = True
+    for col in ws.iter_cols():
+      for cell in col:
+        cell.alignment = openpyxl.styles.Alignment(wrap_text = True)
+  wb.save(excel_fnam)
 
 def dfs2xlsx(sheets, output, engine_kwargs = {}, to_excel_kwargs = {}):
   if not isinstance(sheets, dict):
@@ -20,6 +31,7 @@ def dfs2xlsx(sheets, output, engine_kwargs = {}, to_excel_kwargs = {}):
       assert isinstance(df, pd.DataFrame), f'Variable "df" has non-DataFrame type {type(df)} with value {df}'
       if 'na_rep' in to_excel_kwargs: assert not df_contains(df, to_excel_kwargs['na_rep'])
       df.to_excel(writer, sheet_name = name, **to_excel_kwargs)
+  fit_text(output)
 
 def csvs2xslx(csvs, output, csv_kwargs, engine_kwargs, to_excel_kwargs):
   if isinstance(csvs, str):
