@@ -53,7 +53,7 @@ Q1:
   6:
     answers: null
   7:
-    answers:
+    answers: &Q1_7_answers
       A:
       B:
       C:
@@ -70,20 +70,7 @@ Q1:
       K:
   8:
     answers:
-      A:
-      B:
-      C:
-      D:
-      E:
-      L: "Hepatitis A"
-      M: "Hepatitis B"
-      N: "Hepatitis (unspecified)"
-      G:
-      H:
-      I:
-      O: "Heart Disease"
-      J:
-      K:
+      <<: *Q1_7_answers
   12:
     answers: null
   13:
@@ -92,36 +79,10 @@ Q1:
     answers: null
   15:
     answers:
-      A:
-      B:
-      C:
-      D:
-      E:
-      L: "Hepatitis A"
-      M: "Hepatitis B"
-      N: "Hepatitis (unspecified)"
-      G:
-      H:
-      I:
-      O: "Heart Disease"
-      J:
-      K:
+      <<: *Q1_7_answers
   16:
     answers:
-      A:
-      B:
-      C:
-      D:
-      E:
-      L: "Hepatitis A"
-      M: "Hepatitis B"
-      N: "Hepatitis (unspecified)"
-      G:
-      H:
-      I:
-      O: "Heart Disease"
-      J:
-      K:
+      <<: *Q1_7_answers
 
 Q2:
   question: "Here's a set of cards, each naming a particular disease. I'd like you to look through them and sort out the ones you haven't heard of before. Just give me the number on the cards showing diseases you have not heard of."
