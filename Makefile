@@ -10,7 +10,7 @@ VERSIONS := $(shell seq 1 8) $(shell seq 12 16)
 #These ones don't (directly) make a file
 .PHONY: all clean csvs $(VERSIONS)
 
-all: output/hiv_survey.xlsx
+all: output/hiv_survey.xlsx output/q1.xlsx
 
 csvs: $(VERSIONS)
 
@@ -22,6 +22,12 @@ clean:
 #$@ is the thing to the left of the colon
 output/hiv_survey.xlsx: utils/csv2xlsx.py data/index.csv $(patsubst %,output/version%.csv,$(VERSIONS))
 	python3 $^ -o $@ --freeze-row 1 --na-rep BLANK
+
+output/q%.xlsx: utils/csv2xlsx.py output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv
+	python3 $^ -o $@ --freeze-row 1 --freeze-col 1 --index-col 0 --float-format %.0f
+
+output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv: extract_questions.py map.yaml | output
+	python3 $<
 
 #The % here is a placeholder for a number
 #$* is the same number

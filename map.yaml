@@ -48,8 +48,65 @@ Q1:
     I: "Typhoid"
     J: "Other (CODE AND STATE)"
     K: "Don't know"
+  5:
+    answers: null
+  6:
+    answers: null
+  7:
+    answers:
+      A:
+      B:
+      C:
+      D:
+      E:
+      L: "Hepatitis A"
+      M: "Hepatitis B"
+      N: "Hepatitis (unspecified)"
+      G:
+      H:
+      I:
+      O: "Heart Disease"
+      J:
+      K:
+  8:
+    answers:
+      A:
+      B:
+      C:
+      D:
+      E:
+      L: "Hepatitis A"
+      M: "Hepatitis B"
+      N: "Hepatitis (unspecified)"
+      G:
+      H:
+      I:
+      O: "Heart Disease"
+      J:
+      K:
+  12:
+    answers: null
+  13:
+    answers: null
+  14:
+    answers: null
+  15:
+    answers:
+      A:
+      B:
+      C:
+      D:
+      E:
+      L: "Hepatitis A"
+      M: "Hepatitis B"
+      N: "Hepatitis (unspecified)"
+      G:
+      H:
+      I:
+      O: "Heart Disease"
+      J:
+      K:
   16:
-    # stop: 23
     answers:
       A:
       B:
