@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import re
 import sys
 import copy
 import yaml
@@ -177,7 +178,7 @@ for question in ['q1', 'q2']:
     x = results.query(f'response == @code')
     x.index = x.index.droplevel('response')
     x.index.name = None
-    x.add_prefix('Version ', 'index').to_csv(f'output/{question}_{"_".join(label.lower().split())}.csv') #https://stackoverflow.com/a/10376875
+    x.add_prefix('Version ', 'index').to_csv(f'output/{question}_{"_".join([re.sub("[^a-z0-9]", "", x) for x in label.lower().split()])}.csv')
 
   #and add a csv for the undecoded
   y = answers.index.to_list()
