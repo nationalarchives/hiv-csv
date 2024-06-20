@@ -23,7 +23,10 @@ def read_map(question):
   else:
     answers = question['answers']
   for count, answer in enumerate(answers.keys()):
-    final_answers[0][answer] = question['start'] + count #V-number for this answer
+    if 'start' in question:
+      final_answers[0][answer] = question['start'] + count #V-number for this answer
+    else:
+      final_answers[0][answer] = read_map.start[1] + count #V-number for this answer
   base_answers = final_answers[0]
 
   #Get column headings. These will be the text of the answer in the first version of the survey in which it appears.
@@ -48,11 +51,16 @@ def read_map(question):
     else:
       x = {}
       for count, (identifier, text) in enumerate(answers.items()):
-        x[identifier] = question['start'] + count #V-number for this question in this version
+        if 'start' in question:
+          x[identifier] = question['start'] + count #V-number for this question in this version
+        else:
+          x[identifier] = read_map.start[version] + count #V-number for this question in this version
         if not identifier in headings: #Add a column heading for this identifier, if we do not already have one
           headings[identifier] = text
       final_answers.append(x)
-  return pd.DataFrame(final_answers, args.versions).rename(headings, axis = 'columns'), question['method']['type'] #args.versions is the index here
+  df = pd.DataFrame(final_answers, args.versions)
+  read_map.start = df.max(axis = 1).add(1).to_dict()
+  return df.rename(headings, axis = 'columns'), question['method']['type'] #args.versions is the index here
 
 def get_answers(df):
   #start with all possible answers to first sub-question in first row
