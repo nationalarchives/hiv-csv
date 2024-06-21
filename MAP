@@ -1,0 +1,24 @@
+./data/index.csv: Some static data inserted as a sheet into the output spreadsheet
+./directory.sh: Opens the BN-97-1 documentation
+./to_csv.py: Generate a human-usable CSV file of a version of the survey
+./extract_questions.py: Extract all data for each question across all survey versions. WIP.
+./regenerate.py: Used to test map.yaml's correctness by generating questions from it
+./regeneration_test.sh: Compares questions from map.yaml (via regenerate.py) and *__field_attributes.csv
+./report.sh: Produces summary stats from the run log
+./map.yaml: Describes the survey in a machine readable way that could be useful for this project e.g. relationships between versions of questions, branches. WIP.
+./utils/utils.py: Just contains a single function relating to map.yaml processing. Probably should become map.py and pull in more of the yaml-processing functionality.
+./utils/pdkit.py: Contains a single Pandas helper function, which I think checks to see if a value exists anywhere in a dataframe.
+./utils/csv_combinator.py: Does complex Pandas things to generate a dataaframe of the count of every response to every question across all versions of the survey.
+./utils/csv2xlsx.py: Converts input csv files into sheets in an Excel spreadsheet. Used to pull together to_csv.py output.
+./utils/fnam_col.py: Converts between Excel-style column names and V-codes.
+./Makefile: Rules to build all of this stuff.
+./requirements.txt: Python dependencies.
+./requirements_all.txt: Python dependencies, including some extras.
+
+Glossary
+========
+I've got a bit of terminology, but may not be using it consistently.
+version: A 'version' of the survey.
+v-code: The code representing a particular question in a particular survey.
+response: The response given in answer to a particular question.
+r-code: The code representing the response given in answer to a particular question.
