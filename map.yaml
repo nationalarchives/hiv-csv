@@ -20,13 +20,13 @@ cards:
   16:
     A:
       answers:
-        A:
+        A: null
         I: "Rabies"
         J: "Lung Cancer"
         K: "Alcoholism"
-        E:
-        H:
-        G:
+        E: null
+        H: null
+        G: null
         L: "Drug Addiction"
 
 
@@ -54,20 +54,20 @@ Q1:
     answers: null
   7:
     answers: &Q1_7_answers
-      A:
-      B:
-      C:
-      D:
-      E:
+      A: null
+      B: null
+      C: null
+      D: null
+      E: null
       L: "Hepatitis A"
       M: "Hepatitis B"
       N: "Hepatitis (unspecified)"
-      G:
-      H:
-      I:
+      G: null
+      H: null
+      I: null
       O: "Heart disease"
-      J:
-      K:
+      J: null
+      K: null
   8:
     answers:
       <<: *Q1_7_answers
@@ -187,7 +187,7 @@ Q10:
       Q: "Oral sex/sucking"
       R: "Mentions of promiscuity/having sex with lots of different people/sleeping around"
       F: "Others"
-      G:
+      G: null
       S: "Sex with infected person/carrier of AIDS virus"
 
 Q11:
@@ -218,11 +218,11 @@ Q11:
       A: "Medical staff (doctors, nurses etc.)"
       K: "Homosexuals/gays (unspecified)"
       L: "Promiscuous homosexuals/gays/sleep around/sex with lots of people"
-      C:
+      C: null
       D: "People who need blood transfusions/receive blood"
       E: "People who have sex with a lot of people/promiscuous people/prostitutes"
       I: "Injecting drug users/drug addicts"
-      H:
+      H: null
       J: "Inherited/babies from mothers"
       M: "Ethnic minorities/Haitians/Black people"
       N: "People who have anal intercourse"
@@ -230,6 +230,6 @@ Q11:
       P: "Everybody/anybody who is sexually active"
       Q: "Everybody/anybody (general)"
       F: "Others"
-      G:
+      G: null
       R: "People who have HTLV3 virus"
       S: "Lesbians"
