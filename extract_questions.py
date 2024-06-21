@@ -2,90 +2,179 @@
 
 import os
 import sys
+import copy
 import yaml
 import argparse
-import collections.abc
 import pandas as pd
+from utils.utils import apply_version
 
-VERSIONS = list(range(1, 9)) + list(range(12, 17))
-
-def read_map():
-  with open('map.yaml') as f:
-    survey_map = yaml.load(f, yaml.Loader)
-
+def read_map(question):
   #Get answers from version 1, to use as a baseline
-  question = survey_map['Q1']
-  start = question['start']
-  answers = [{}]
-  for count, answer in enumerate(question['answers'].keys()):
-    answers[0][answer] = start + count #V-number for this answer
-  base_answers = answers[0]
+  full_question = survey_map[question.upper()]
+  question = copy.deepcopy(full_question)
+  final_answers = [{}]
+  if question['method']['type'] == 'card':
+    cards = copy.deepcopy(survey_map['cards'])
+    apply_version(cards, 1)
+    if question['method']['subtype'] == 'select 3':
+      answers = question['method']['subquestions']
+    else:
+      answers = cards[question['method']['set']]['answers']
+  else:
+    answers = question['answers']
+  for count, answer in enumerate(answers.keys()):
+    final_answers[0][answer] = question['start'] + count #V-number for this answer
+  base_answers = final_answers[0]
 
   #Get column headings. These will be the text of the answer in the first version of the survey in which it appears.
   #We start with all of the answers in the base version.
-  headings = {identifier: text for identifier, text in question['answers'].items()}
+  headings = {identifier: text for identifier, text in answers.items()}
 
-  for version in VERSIONS[1:]:
-    if (not version in question) or (not 'answers' in question[version]):
-      answers.append(base_answers) #read-only, so we don't need a deep copy
-    elif question[version]['answers'] is None: #answers specified, but null
-      answers.append({})
+  for version in args.versions[1:]:
+    question = copy.deepcopy(full_question)
+    apply_version(question, version)
+    if question['method']['type'] == 'card':
+      cards = copy.deepcopy(survey_map['cards'])
+      apply_version(cards, version)
+      if question['method']['subtype'] == 'select 3':
+        answers = question['method']['subquestions']
+      else:
+        answers = cards[question['method']['set']]['answers']
+    else:
+      answers = question['answers']
+
+    if answers is None: #answers specified, but null
+      final_answers.append({})
     else:
       x = {}
-      for count, (identifier, text) in enumerate(question[version]['answers'].items()):
-        x[identifier] = start + count #V-number for this question in this version
+      for count, (identifier, text) in enumerate(answers.items()):
+        x[identifier] = question['start'] + count #V-number for this question in this version
         if not identifier in headings: #Add a column heading for this identifier, if we do not already have one
           headings[identifier] = text
-      answers.append(x)
+      final_answers.append(x)
+  return pd.DataFrame(final_answers, args.versions).rename(headings, axis = 'columns'), question['method']['type'] #args.versions is the index here
 
-  return pd.DataFrame(answers, VERSIONS).rename(headings, axis = 'columns') #VERSIONS is the index here
+def get_answers(df):
+  #start with all possible answers to first sub-question in first row
+  #I assume that this will always be defined. If not, I'll get an exception here.
+  base = response_meta[1].loc[f'V{int(df.iloc[0,0])}']['VALUE'].squeeze() #using squeeze here forces this to be returned as a new series, suppressing later warnings about setting a value on a copy of a slice of a data frame -- and ensuring that I'm not accidentally updating the underlying dataframe
 
-def count_answers(df):
-  responses = {}
-  for version in VERSIONS:
-    responses[version] = pd.read_csv(args.input_dir + f'/version{version}.csv') #many of these need to be float (so they can include nan), some need to be object (because they can be non-integer)
+  #confirm that possible answers to a question are always the same
+  for index, row in df.iterrows(): #Feels like not the Pandas way to be using iterrows
+    for col_num in range(0, len(row.index)):
+      code = row.iloc[col_num]
+      if pd.isna(code):
+        continue #question does not exist in this version, so cannot have different answers
+      code = str(int(code))
+      try:
+        s = response_meta[index].loc['V' + code]['VALUE']
+      except:
+        print(response_meta[index])
+        print('index\n', index, '\n\n', 'row\n', row, '\n\ncode\n', code, '\n\n', file = sys.stderr)
+        raise
+      try:
+        if len(base.compare(s).index) > 0: raise
+      except:
+        print('index\n', index, '\n\n', 'row\n', row, '\n\ncode\n', code, '\n\n', file = sys.stderr)
+        print(f'Different answer(s) between base and version {index}, code V{code}', file = sys.stderr)
+        print(base, file = sys.stderr)
+        print(s, file = sys.stderr)
+        print(base.compare(s), file = sys.stderr)
+        raise
 
-  def _count_answers(v_number, version, targets, vert = True):
-    #applied to a series (and so suitable to be called in apply, row-by-row (axis=1))
-    #v_number is the identifier for the question
-    #version is the version of the survey for which we are counting answers
-    #targets is the answer(s) that we are returning a count for
-    #vert means to return count for answers in targets -- if False, return for answers not in targets (i.e. invert if False)
-    if pd.isna(v_number): return None
+  if args.blank_response in base.index:
+    print(f'Blank response {args.blank_response} should not be present in possible responses', file = sys.stderr)
+    sys.exit(1)
+  base.loc[args.blank_response] = 'Blank'
 
-    if isinstance(targets, str) or not isinstance(targets, collections.abc.Iterable):
-      targets = [targets]
-    targets = map(lambda x: 'None' if x is None else x, targets)
+  #answers are always the same, return them
+  return base
 
-    s = responses[version]['V' + str(int(v_number))]
-    vc = s.value_counts()
-    assert not 'None' in vc.index
-    none_count = s.isna().value_counts().loc[True]
-    vc = pd.concat([vc, pd.Series(none_count, ['None'])])
-    if vert:
-      return vc.loc[  vc.index.isin(targets) ].sum()
-    else:
-      return vc.loc[~(vc.index.isin(targets))].sum()
+def count_responses(df, answers):
+  def count_decodable(version_response_v_codes):
+    #called once for each possible response within each survey version (rows in the df)
+    #version_response_v_codes is a Series of v-codes corresponding to a given response to a question
+    #breakpoint()
+    counts = [] #count of each possible response to the question in the survey version
+    labels = [] #label for the response (i.e. the answer given to the question)
+    for label, v_code in version_response_v_codes.items():
+      if pd.isna(v_code):
+        counts.append(v_code) #question is not defined for this version
+      else:
+        count = response_counts.loc[version_response_v_codes.name][f'V{int(v_code)}']
+        counts.append(0 if pd.isna(count) else count) #if count is na this means the question was defined for the current version, but no-one gave this response
+      labels.append(label)
+    return pd.Series(counts, labels)
 
-  #TODO: Obviously sub-optimal to essentially count everything 3 times (i.e. that we call value_counts() within 'count')
-  yes         = df.apply(lambda x: x.apply(_count_answers, args = (x.name, 1)),                   axis = 1)
-  no          = df.apply(lambda x: x.apply(_count_answers, args = (x.name, 0)),                   axis = 1)
-  blank       = df.apply(lambda x: x.apply(_count_answers, args = (x.name, None)),                axis = 1)
-  undecodable = df.apply(lambda x: x.apply(_count_answers, args = (x.name, (1, 0, None), False)), axis = 1)
+  def count_undecodable(version_response_v_codes):
+    counts = [] #count of each possible response to the question in the survey version
+    labels = [] #label for the response (i.e. the answer given to the question)
+    for label, v_code in version_response_v_codes.items():
+      if pd.isna(v_code):
+        counts.append(v_code) #question is not defined for this version
+      else:
+        rcv = response_counts.loc[version_response_v_codes.name][f'V{int(v_code)}'] #all responses for this V-code in this version
+        rcv = rcv.loc[~(rcv.index.isin(answers.index.to_list()))].dropna()
+        counts.append(0 if rcv.size == 0 else rcv.sum())
+      labels.append(label)
+    return pd.Series(counts, labels)
 
-  return {
-    'yes': yes,
-    'no': no,
-    'blank': blank,
-    'undecodable': undecodable,
-  }
+  df_u = df.apply(count_undecodable, axis = 1)
+  df_u = pd.concat([df_u], keys = ['undecodable'], names = ['response', 'version']).swaplevel()
+
+  df = pd.concat([df] * len(answers), keys = answers.index, names = ['response', 'version']).swaplevel()
+  df = df.apply(count_decodable, axis = 1) #convert v_codes in df into counts of responses given to that question
+
+  return pd.concat([df, df_u])
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_dir',
+parser.add_argument('versions',
+                    nargs = '*',
+                    type = int,
+                    default = list(range(1, 9)) + list(range(12, 17)),
+                    help = 'Survey versions to include (defaults to all)')
+parser.add_argument('--input-dir',
                     default = f'{os.path.dirname(sys.argv[0])}/BN-97-1' if len(os.path.dirname(sys.argv[0])) else './BN-97-1',
                     help = 'Location of BN-97-1 data files')
+parser.add_argument('--all-response-counts',
+                    default = f'{os.path.dirname(sys.argv[0])}/output/intermediates/all_response_counts.pkl' if len(os.path.dirname(sys.argv[0])) else './output/intermediates/all_response_counts.pkl',
+                    help = 'Location of cached all_response_counts dataframe')
+parser.add_argument('--blank-response', '-b',
+                    default = '-1',
+                    help = 'Value used to represent a blank response')
 args = parser.parse_args()
 
-for answer, counts_df in count_answers(read_map()).items():
-  counts_df.add_prefix('Version ', 'index').to_csv(f'output/q1_{answer}.csv')
+with open('map.yaml') as f:
+  survey_map = yaml.load(f, yaml.Loader)
+
+response_meta = {}
+for version in args.versions:
+  response_meta[version] = pd.read_csv(args.input_dir + f'/version{version}__field_encoding.csv', index_col = ['FIELD_NAME', 'CODE'], converters = {'CODE': str})
+response_counts = pd.read_pickle('output/intermediate/all_response_counts.pkl')
+
+for question in ['q1', 'q2']:
+  question_df, question_type = read_map(question)
+  if question_type == 'open question':
+    answers = pd.Series(['No', 'Yes', 'blank'], ['0', '1', args.blank_response])
+    results = count_responses(question_df, answers)
+  elif question_type == 'card':
+    answers = get_answers(question_df)
+    results = count_responses(question_df, answers)
+  else:
+    assert False, f'Unhandled question_type {question_type}'
+
+  #dump out csv per response
+  for code, label in answers.items():
+    x = results.query(f'response == @code')
+    x.index = x.index.droplevel('response')
+    x.index.name = None
+    x.add_prefix('Version ', 'index').to_csv(f'output/{question}_{"_".join(label.lower().split())}.csv') #https://stackoverflow.com/a/10376875
+
+  #and add a csv for the undecoded
+  y = answers.index.to_list()
+  x = results.query('response not in @y')
+  if not x.empty:
+    x.index = x.index.droplevel('response')
+    x.index.name = None
+    x.add_prefix('Version ', 'index').to_csv(f'output/{question}_undecodable.csv')

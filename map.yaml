@@ -17,6 +17,21 @@ cards:
       F: "Flu"
       G: "Hepatitis"
       H: "Syphilis"
+  5:
+    A:
+      answers: null
+  6:
+    A:
+      answers: null
+  12:
+    A:
+      answers: null
+  13:
+    A:
+      answers: null
+  14:
+    A:
+      answers: null
   16:
     A:
       answers:
@@ -86,10 +101,19 @@ Q1:
 
 Q2:
   question: "Here's a set of cards, each naming a particular disease. I'd like you to look through them and sort out the ones you haven't heard of before. Just give me the number on the cards showing diseases you have not heard of."
+  start: 21
   method:
     type: "card"
     subtype: "elimination"
     set: A
+  7:
+    start: 25
+  8:
+    start: 24
+  15:
+    start: 24
+  16:
+    start: 24
 
 Q3:
   question: "Now could you sort those you have heard of to show how common or rare they are in Britain today?"

@@ -14,6 +14,8 @@ all: output/hiv_survey.xlsx output/q1.xlsx
 
 csvs: $(VERSIONS)
 
+intermediates: output/intermediate/all_response_counts.csv output/intermediate/all_response_counts.pkl
+
 clean:
 	rm -rf output/
 
@@ -22,6 +24,10 @@ clean:
 #$@ is the thing to the left of the colon
 output/hiv_survey.xlsx: utils/csv2xlsx.py data/index.csv $(patsubst %,output/version%.csv,$(VERSIONS))
 	python3 $^ -o $@ --freeze-row 1 --na-rep BLANK
+
+#Where there are multiple targets (left of colon), then $@ is the target that caused the rule to run
+output/intermediate/%.pkl output/intermediate/%.csv: utils/csv_combinator.py | output/intermediate
+	 python3 $^ -o $(basename $@) $(ARC_ARGS)
 
 output/q%.xlsx: utils/csv2xlsx.py output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv
 	python3 $^ -o $@ --freeze-row 1 --freeze-col 1 --index-col 0 --float-format %.0f
@@ -41,6 +47,9 @@ output:
 
 output/LOG: | output
 	mkdir output/LOG
+
+output/intermediate: | output
+	mkdir $@
 
 to_csv.py: utils/fnam_col.py utils/pdkit.py
 
