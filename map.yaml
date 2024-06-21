@@ -136,9 +136,9 @@ Q6:
     subtype: "select 3"
     set: A
     subquestions:
-      - 'Of these three diseases which one do you feel poses the greatest threat to the health of this country?'
-      - 'Of these three diseases which one do you feel poses the second greatest threat to the health of this country?'
-      - 'Of these three diseases which one do you feel poses the third greatest threat to the health of this country?'
+      A: 'Of these three diseases which one do you feel poses the greatest threat to the health of this country?'
+      B: 'Of these three diseases which one do you feel poses the second greatest threat to the health of this country?'
+      C: 'Of these three diseases which one do you feel poses the third greatest threat to the health of this country?'
 
 Q7:
   question: "Now, thinking about all the diseases you have heard of are there any about which you think a lot of conflicting advice is given nowadays, which confuses people? You may mention as many, or as few, as you like."
@@ -156,6 +156,7 @@ Q8:
 
 Q9:
   question: "And which one of these are you personally most concerned about as a danger to your own health?"
+  start: 76
   method:
     type: "card"
     subtype: "select 1"

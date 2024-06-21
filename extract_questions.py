@@ -61,11 +61,20 @@ def read_map(question):
       final_answers.append(x)
   df = pd.DataFrame(final_answers, args.versions)
   read_map.start = df.max(axis = 1).add(1).to_dict()
-  return df.rename(headings, axis = 'columns'), question['method']['type'] #args.versions is the index here
+
+  qmt = question['method']['type']
+
+  #not sure about the 'or' in the first clause here -- it should happen to work for q7 and q8, but may not generalise
+  #TODO: The correct way to do this is to get the field's datatype from field_meta -- we just want to know whether it is logical or not
+  #      I can likely do this at the caller, rather than here
+  if qmt == 'open question' or (qmt == 'card' and question['method']['subtype'] == 'board_none_dontknow'): qmt = 'yesno'
+  else: qmt = 'defined'
+  return df.rename(headings, axis = 'columns'), qmt #args.versions is the index here
 
 def get_answers(df):
   #start with all possible answers to first sub-question in first row
   #I assume that this will always be defined. If not, I'll get an exception here.
+  print(df)
   base = response_meta[1].loc[f'V{int(df.iloc[0,0])}']['VALUE'].squeeze() #using squeeze here forces this to be returned as a new series, suppressing later warnings about setting a value on a copy of a slice of a data frame -- and ensuring that I'm not accidentally updating the underlying dataframe
 
   #confirm that possible answers to a question are always the same
@@ -162,12 +171,17 @@ for version in args.versions:
   response_meta[version] = pd.read_csv(args.input_dir + f'/version{version}__field_encoding.csv', index_col = ['FIELD_NAME', 'CODE'], converters = {'CODE': str})
 response_counts = pd.read_pickle('output/intermediate/all_response_counts.pkl')
 
-for question in ['q1', 'q2']:
+for question in [f'q{x}' for x in range(1, 10)]:
+  if question == 'q6':
+    for k, v in read_map.start.items():
+      read_map.start[k] = v + 3
+    continue
+  print(question.upper() + '...', end = '')
   question_df, question_type = read_map(question)
-  if question_type == 'open question':
+  if question_type == 'yesno':
     answers = pd.Series(['No', 'Yes', 'blank'], ['0', '1', args.blank_response])
     results = count_responses(question_df, answers)
-  elif question_type == 'card':
+  elif question_type == 'defined':
     answers = get_answers(question_df)
     results = count_responses(question_df, answers)
   else:
@@ -187,3 +201,4 @@ for question in ['q1', 'q2']:
     x.index = x.index.droplevel('response')
     x.index.name = None
     x.add_prefix('Version ', 'index').to_csv(f'output/{question}_undecodable.csv')
+  print('done')
