@@ -10,11 +10,14 @@ VERSIONS := $(shell seq 1 8) $(shell seq 12 16)
 #These ones don't (directly) make a file
 .PHONY: all clean csvs $(VERSIONS)
 
+#do not delete any intermediate files (re https://www.gnu.org/software/make/manual/make.html#Chained-Rules)
+#.INTERMEDIATE: (with no prereqs) is a better way to do this, but requires make >= 4.4, my Ubuntu has 4.3
+.PRECIOUS: output/q1_yes.csv output/q1_no.csv output/q1_blank.csv output/q1_undecodable.csv output/intermediate/all_response_counts.pkl
+
 all: output/hiv_survey.xlsx output/q1.xlsx
 
 csvs: $(VERSIONS)
 
-intermediates: output/intermediate/all_response_counts.csv output/intermediate/all_response_counts.pkl
 
 clean:
 	rm -rf output/
@@ -27,12 +30,12 @@ output/hiv_survey.xlsx: utils/csv2xlsx.py data/index.csv $(patsubst %,output/ver
 
 #Where there are multiple targets (left of colon), then $@ is the target that caused the rule to run
 output/intermediate/%.pkl output/intermediate/%.csv: utils/csv_combinator.py | output/intermediate
-	 python3 $^ -o $(basename $@) $(ARC_ARGS)
+	python3 $^ -o $(basename $@) $(ARC_ARGS)
 
 output/q%.xlsx: utils/csv2xlsx.py output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv
 	python3 $^ -o $@ --freeze-row 1 --freeze-col 1 --index-col 0 --float-format %.0f
 
-output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv: extract_questions.py map.yaml | output
+output/q%_yes.csv output/q%_no.csv output/q%_blank.csv output/q%_undecodable.csv: extract_questions.py map.yaml output/intermediate/all_response_counts.pkl | output
 	python3 $<
 
 #The % here is a placeholder for a number
