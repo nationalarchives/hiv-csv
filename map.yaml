@@ -4,6 +4,20 @@
 ---
 types:
   disease_awareness: "Q1 - Q9"
+  transmission: "Q10 - Q14"
+  risk: "Q15"
+  attitudes: "Q16" #this one really seems like a grab bag, if it wasn't I might list Q19 here too
+  getting_information: "Q17 - Q18"
+  attititudes_aids_in_family: "Q19"
+  recent_information: "Q20 - Q24"
+  leaflet: "Q27 - Q28"
+  attitudes_homosexuality: "Q29 - Q30"
+  newspapers: "Q32 - Q33"
+  classification: "Q34 - Q45" #i.e. demographics. first ones not numbered, at least in v1
+  sexual_behaviour: "Q46 - Q50"
+  survey_attitude: "Q51 - Q52"
+  potential_homosexual_bisexual_respondent: "Q55 - Q56"
+  interview_circumstances: "Q57 - Q58"
 
 
 cards:
@@ -44,6 +58,142 @@ cards:
         G: null
         L: "Drug Addiction"
 
+  grey:
+    answers:
+      A: "kissing"
+      B: "toilet seats"
+      C: "drinking from the same glass"
+      D: "coughs and sneezes"
+      E: "holding hands"
+      F: "blood transfusions"
+      G: "sex activities between a man and woman"
+      H: "sex activities between two men"
+      I: "sex activities between two women"
+      J: "injections"
+      K: "being bitten"
+      L: "being spat on"
+      M: "passed on to an unborn baby by its mother"
+      N: "Don't know"
+
+  orange:
+    answers:
+      A: "ambulancemen"
+      B: "blood donors"
+      C: "doctors"
+      D: "haemophiliacs"
+      E: "homosexual men"
+      F: "injecting drug users"
+      G: "lesbian women"
+      H: "men who have sex with a lot of different women"
+      I: "Men who have sex with prostitutes"
+      J: "Nurses"
+      K: "People who have casual sex with someone they don't know well"
+      L: "People who need blood transfusions"
+      M: "Women who have sex with a lot of different men"
+      N: "Women who have sex with bi-sexual men"
+      O: "Dentists"
+      P: "Don't know"
+
+  yellow:
+    answers:
+      A: "1. If everyone acts responsible, the disease will be kept under control."
+      B: "2. I don't think I'll ever catch AIDS."
+      C: "3. I don't feel sorry for homosexual who have caught AIDS, because it's their own fault."
+      D: "4. Parents should be told if a child with AIDS is attending their child's school."
+      E: "5. People with AIDS should be put into quarantine in special places to keep them away from the general public."
+      F: "6. The Government would be spending more money on AIDS if the disease did not mainly affect homosexual men."
+      G: "7. You can't catch AIDS from giving blood nowadays."
+      H: "8. I don't feel sorry for drug abusers who have caught AIDS because it's their own fault."
+      I: "9. I would be willing to pay extra taxes if that moeny were used to find a cure for AIDS."
+      J: "10. AIDS is much more difficult to catch than most people think."
+      K: "11. Anyone who catches AIDS only has themself to blame."
+      L: "12. Everyone in the country is at risk from AIDS."
+      M: "13. You can't catch AIDS from blood transfusions nowadays."
+      N: "14. There are several ways to reduce the risk of catching AIDS."
+      O: "15. Only those who have sex with a lot of different people are likely to catch AIDS."
+      P: "16: The Government is doing enough to advise people how to reduce their risks of catching AIDS."
+      Q: "17: The newspapers have been too sensational in their reporting of AIDS."
+      R: "18. People can considerably reduce the risk of catching AIDS if they use sheaths (like Durex) when they have sex."
+      S: "19. People can considerably reduce the risk of catching AIDS if they cut down the number of sexual partners they have."
+      T: "20. Lots of research is under way to find a cure for AIDS."
+
+  blue:
+    answers:
+      A: "1. I'd be disgusted"
+      B: "2. I'd be very sympathetic"
+      C: "3. I'd feel lost and not know what to do or say"
+      D: "4. I'd be worried for myself"
+      E: "5. I'd rather they had not told me"
+      F: "6. I'd feel it would be their own fault"
+      G: "7. I simply wouldn't be able to believe it"
+      H: "8. I'd think I must stop seeing them"
+      I: "9. I must be sure never to touch them"
+      J: "10. I wouldn't want them in my home again"
+      K: "11. I'd want to do my utmost to help them"
+      L: "12. I wouldn't feel any differently towards them"
+
+  white:
+    answers:
+      A: "1. Homosexual men are found in all social classes and all walks of life."
+      B: "2. It's only a small minority of homosexual men who can be picked out; the majority look just like everybody else"
+      C: "3. Scenes showing homosexual relationships should be banned from television and films"
+      D: "4. The age at which two men can legally have sex should be the same as for a man and a woman"
+      E: "5. Homosexual men should not be allowed to teach in schools"
+      F: "6. I'd feel embarrassed if I learned that one of my friends or relatives was a homosexual"
+      G: "7. Homosexual men should be judged on their personal merits just like everybody - what they do in private is their own business"
+      H: "8. Some men have sex with both men and women"
+      I: "9. I am more worried about meeting homosexuals than I used to be"
+  B:
+    answers:
+      A: "News of the World"
+      B: "Sunday (News of the world magazine)"
+      C: "Sunday Express"
+      D: "Sunday Express magazine"
+      E: "Mail on Sunday"
+      F: "You (Mail on Sunday magazine)"
+      G: "Observer"
+      H: "Observer magazine"
+      I: "Sunday Times"
+      J: "Sunday Times magazine"
+      K: "Sunday Telegraph"
+      L: "Sunday Telegraph magazine"
+      M: "Sunday Mirror"
+      N: "Sunday People"
+      O: "Sunday Mail (Scotland)"
+      P: "Sunday Post (Scotland)"
+      Q: "Sunday Mercury (Birmingham)"
+      R: "Sunday Sun (Newcastle-upon-Tyne)"
+      S: "None of these"
+      T: "Don't know"
+
+  C:
+    answers:
+      A: "Local evening/daily paper"
+      B: "Daily Express"
+      C: "Daily Mail"
+      D: "Daily Mirror"
+      E: "The Sun"
+      F: "Daily Telegraph"
+      G: "Financial Times"
+      H: "The Guardian"
+      I: "The Times"
+      J: "Daily Record"
+      K: "Daily Star"
+      L: "Sporting Life"
+      M: "Today"
+      N: "None of these"
+      O: "Don't know"
+
+  D:
+    A: "1. GP/Family Doctor"
+    B: "2. Consultant/Surgeon/Specialist Doctor"
+    C: "3. Doctor/Nurse"
+    D: "4. Medical support services (eg. ambulance staff)"
+    E: "5. Health Visitor"
+    F: "6. Advice/support group (eg. Samaritans. A.A.)"
+    G: "7. Dentist"
+    H: "8. None of these"
+    I: "9. Don't know"
 
 Q1:
   question: "What would you say are the most serious diseases and infections that might affect the health of the people in this country nowadays?"
@@ -163,8 +313,13 @@ Q9:
 
 Q10:
   branch:
-    condition: 'IF NEVER HEARD OF "AIDS" (NUMBER 5)'
-    target: "Q34"
+    condition: "IF NEVER HEARD OF 'AIDS' (NUMBER 5)"
+    yes:
+      target: "Q34"
+      label: "never heard of AIDS"
+      direction: "e"
+    no:
+      label: "heard of AIDS"
   question: "The rest of this questionnaire is about one of these diseases, AIDS. As far as you know, what are the main ways of catching AIDS? What other ways?"
   method:
     type: "open question"
@@ -184,7 +339,8 @@ Q10:
   16:
     branch:
       condition: 'IF NEVER HEARD OF "AIDS" (NO 5) at Q.2.'
-      target: "Q50"
+      yes:
+        target: "Q50"
     question: "The rest of this questionnaire is about one of these diseases, AIDS. As far as you know, how do people catch AIDS? How else?"
     method:
       subtype:
@@ -250,3 +406,525 @@ Q11:
       G: null
       R: "People who have HTLV3 virus"
       S: "Lesbians"
+
+Q12:
+  question: "Each of these cards shows a way in which someone has told us they think AIDS can be caught. I'd like you to sort these cards to show us in which of these ways you think AIDS can be caught nowadays."
+  method:
+    type: "card"
+    subtype: "sort"
+    set: "grey"
+
+Q13:
+  branch:
+    condition: "IF 'SEX BETWEEN MAN AND WOMAN' (NUMBER 7) IN 'CAN BE CAUGHT' COLUMN ASK Q13. OTHERS SKIP TO Q14."
+    no:
+      target: "Q14"
+      label: "Man/woman sex not in 'can be caught'"
+    yes:
+      label: "Man/woman sex in 'can be caught'"
+  question: "Is the risk of catching AIDS about the same for all forms of sex act between a man and a woman or are some acts more risky than others?"
+  method:
+    "open question" #but it has only 3 possible answers...
+
+Q14:
+  branch:
+    condition: "IF 'SEX ACTIVITIES BETWEEN TWO MEN' (NUMBER 8) IN 'CAN BE CAUGHT' COLUMN AT Q12 ASK Q.14. OTHERS SKIP TO Q15."
+    no:
+      target: "Q15"
+      label: "man/man sex not in 'can be caught'"
+    yes:
+      label: "man/man sex in 'can be caught'"
+  question: "Is the risk of catching AIDS about the same for all forms of sex between two men, or are some more risky than others?"
+  method:
+    "open question" #but it has only 3 possible answers...
+
+Q15:
+  question: "Summing up, how at risk from catching AIDS do you think the different types of people listed on these cards are?"
+  method:
+    type: "card"
+    subtype: "sort"
+    set: "orange"
+
+Q16:
+  question: "On these cards are listed some things that people have said about AIDS could you show me how much you personally agree or disagree with each one."
+  method:
+    type: "card"
+    subtype: "sort"
+    set: "yellow"
+
+Q17:
+  question: "If you wanted to know more about AIDS how easy do you think you would find it to get reliable information?"
+  method:
+    type: "prompt card"
+    set: "A"
+
+Q18:
+  question: "And how do you think you would best go about getting any reliable information?"
+  method:
+    type: "open question" #is it?
+  answers:
+    A: "Ask a doctor"
+    B: "Ask a friend"
+    C: "Library"
+    D: "Phone special line"
+    E: "Send for leaflet"
+    F: "Special organisation (e.g. Terrence Higgin's Trust)"
+    G: "VD clinic"
+    H: "Other (CODE AND STATE)"
+    I: "Don't know"
+    J: "Hospital"
+    K: "Health clinic/Health Education Service/Health visitor"
+    L: "Gay press"
+
+Q19:
+  start: "??" #there are a few non-question fields just before this question
+  question: "And now I'd like to get some ideas of how you personally would feel it a close relative like brother or sister contracted AIDS. Try to imagine yourself in that situation and show how likely you'd be to feel each of these things by sorting these cards onto this board."
+  method:
+    type: "card"
+    subtype: "sort"
+    set: "blue"
+
+Q20:
+  question: "Have you seen or heard or read any information anywhere about AIDS recently?"
+  method:
+    type: "open question" #yes, no, don't know
+
+Q21:
+  branch:
+    condition: "IF 'YES'" #ie. to Q20
+    no:
+      target: "Q22" #for now... the HTML docs are unclear here, it might well be Q23
+  question: "Where did you see or hear this information?"
+  method:
+    type: "open question"
+    subtype:
+      - "no prompt"
+  answers:
+    A: "*Adverts - TV"
+    B: "*Adverts - Radio"
+    C: "*Adverts - Newspapers"
+    D: "*Adverts - Magazines"
+    E: "Others - TV programmes"
+    F: "Others - Radio programmes"
+    G: "Others - Newspaper articles"
+    H: "Others - Posters"
+    I: "Others - Pamphlet/Leaflet"
+    J: "Others - Talking with friends"
+    K: "Others - Telephone line"
+    L: "Anywhere else (CODE AND STATE)"
+    M: "Don't know"
+
+Q22:
+  branch:
+    condition: "IF ALL TYPES OF ADVERT MARKED * MENTIONED AT Q.21. SKIP TO Q.24."
+    yes:
+      label: "All * mentoned"
+      target: "Q24" #or is it Q23? See below.
+    no:
+      label: "Not all * mentioned"
+  question: "FOR EACH TYPE OF ADVERT NO MENTIONED AT Q21 ASK:"
+  answers:
+    A: "Do you remember seeing any TV advertising about AIDS recently?"
+    B: "Do you remember seeing any Radio advertising about AIDS recently?"
+    C: "Do you remember seeing any Newspaper advertising about AIDS recently?"
+    D: "Do you remember seeing any Magazines advertising about AIDS recently?"
+
+Q23:
+#  #bafflingly, this is an "Ask all", even though we've just been told to skip to Q24
+  question: "Have you discussed or talked about the subject of AIDS at all with anyone recently?"
+  method:
+    type: "open question" #yes/no/don't know
+
+Q24:
+  question: "On the whole, do you feel you know more about AIDS than you did a couple of months ago?"
+  method:
+    type: "open question" #yes/no/don't know
+
+#No Q25 or Q26 in v1
+Q27:
+  question: "Here is a leaflet which is available to the general public with information about AIDS. Have you ever seen this leaflet?"
+  method:
+    type: "open question" #yes/no/don't know
+
+Q28:
+  branch:
+    condition: "IF 'YES' SHOW PROMPT CARD X"
+    no:
+      target: "Q29"
+  question: "How much have you looked at it?"
+  method:
+    type: "prompt"
+    card: "X"
+
+Q29:
+  method:
+    type: "card"
+    subtype: "sort"
+    set: "white"
+  question: "In this country the people who are currently most at risk are some types of homosexual men. On these cards are some opinions on homesexuality. Can you sort then to show me how much you agree or disagree with each one."
+
+Q30:
+  question: "Do you personally know any homosexual or bisexual men?"
+  method:
+    type: "open question" #yes/no/don't know
+
+Q31:
+  question: "Do you personally know anyone who injects drugs without medical supervision?"
+  method:
+    type: "open question" #yes/no/don't know
+
+Q32:
+  method:
+    type: "card"
+    subtype: "prompt"
+    card: "B"
+  question: "Thankyou very much for your help. Now I'd like to ask you a few questions about the newspapers you read nowadays. Firstly, which of these Sunday newspapers do you look at regularly - I mean at least 3 out of 4 issues? Which others?"
+
+Q33:
+  method:
+    type: "card"
+    subtype: "prompt"
+    card: "C"
+  question: "Now thinking about daily newspapers which of these do you look at regularly. I mean at least 4 issues a week? Which others?"
+
+Q34: #un-numbered in v1
+  question: "COLLECT CLASSIFICATION DETAILS: SEX"
+
+Q35: #un-numbered in v1
+  question: "COLLECT CLASSIFICATION DETAILS: AGE"
+
+Q36: #un-numbered in v1
+  question: "COLLECT CLASSIFICATION DETAILS: WORKING STATUS"
+
+Q37: #un-numbered in v1
+  question: "COLLECTION CLASSIFICATION DETAILS: TERMINAL EDUCATION AGE"
+
+Q38: #un-numbered in v1
+  question: "NOW CODE SOCIAL GRADE"
+  answers:
+    A: "A"
+    B: "B"
+    C: "C1"
+    D: "C2"
+    E: "D"
+    F: "E (h.o.h under 60)"
+    G: "E (h.o.h 60+)"
+
+Q39:
+  method:
+    type: "card"
+    subtype: "prompt"
+    card: "D"
+  question: "Do you personally work in any of these occupations (either paid or unpaid)? Which?"
+
+Q40:
+  method:
+    type: "card"
+    subtype: "prompt"
+    card: "D"
+  question: "Does anyone else in your household work in any of these occupation (either paid or unpaid)? Which?"
+
+Q41: #un-numbered in v1
+  question: 'MARITAL STATUS'
+
+Q42:
+  question: "Is everyone in this household over the age of 16, or are there any children living here?"
+
+Q43:
+  question: "Number of people aged 16 or over in household?"
+
+Q44:
+  question: "Number of children (aged under 16) in household."
+
+Q45:
+  question: "Are there both men and womn living in this household (includes children)"
+
+Q46:
+  question: "This is a very important study concerning the health of the nation. Now I'd like to ask you a few personal questions. SHOW LARGE WHITE CARD 1. Please read the question, and answer by reading the code letter alongside the answer you want to give. CARD 1: How many different partners of the opposite sex have you had in the last 12 months?"
+
+Q47:
+  branch:
+    condition: "IF 'G' AT Q.46."
+    yes:
+      label: 'G'
+    no:
+      label: 'not G'
+      target: 'Q48'
+  question: "HAND OVER ENVELOPE WITH GREEN BOOKLET FOR MEN, YELLOW FOR WOMEN, AND ASK RESPONDENT TO COMPLETE. WHEN FINISHED ENSURE BOOKLET IS RE-SEALED IN ENVELOPE. RECORD SEX OF RESPONDENT"
+
+Q48:
+  branch:
+    condition: "IF MAN: SHOW LARGE WHITE CARD 2"
+    yes:
+      label: "man"
+    no:
+      label: "not man"
+      target: "Q49"
+  question: "Similarly, please read this question, and answer by reading out the code letter alongside the answer you want to give. CARD 2: Being completely honest, how would you describe your feelings towards your own sex?"
+
+Q49: #shares a V-code with Q50?
+  branch:
+    condition: "IF 'L', 'B' OR 'J' AT Q.48. SHOW LARGE WHITE CARD 3."
+    yes:
+      label: "L, B or J"
+    no:
+      label: "Not L, B or J"
+      target: "Q50"
+  question: "And finally, could you read this question and give me the letter beside your answer? CARD 3: How many different partners of the same sex have you had in the last 12 months?"
+
+Q50: #shares a V-code with Q49?
+  branch:
+    condition: "IF 'H' OR 'S' AT Q.49. HAND OVER ENVELOPE WITH BLUE BOOKLET AND ASK RESPONDENT TO COMPLETE IT. WHEN FINISHED ENSURE BOOKLET IS RE-SEALED IN ENVELOPE."
+    yes:
+      label: 'H or S'
+      #could model this as branching to 200, perhaps embedding the question in the branch condition -- assuming that this is what is happening at 200
+      target: 'Q200'
+    no:
+      label: 'Not H or S'
+      target: 'Q51'
+      direction: 's'
+  question: "" #modelling this one in a funny way, see above comment
+
+Q51:
+  question: "This has been a serious study we'd like to know how worthwhile you feel it has been to give your time to contribute."
+
+Q52:
+  question: "It we need to talk to people again would you willing to give us another interview on the same sort of subject?"
+
+#V1 appears not to have Q53-4
+
+Q55:
+  branch:
+    condition: "CHECK BACK TO Q.30. IF RESPONDENT DOES KNOW HOMOSEXUAL OR BISEXUAL MAN ASK Q.55., OTHERS SKIP TO Q.58"
+    yes:
+      label: "Knows suitable man"
+    no:
+      label: "Does not know suitable man"
+      target: "Q58" #should be 57?
+  question: "You said you knew a man who was (men who were) homosexual or bisexual. As we are interested in their views would you ask him (them) if he is prepared for me to get in touch with him to ask him some questions similar to the ones we have just asked you? (MAKE SURE RESPONDENT UNDERSTANDS WE DO NOT WANT THE NAME OR ADDRESS OF THIS PERSON)"
+
+Q56:
+  branch:
+    condition: "IF 'YES'"
+    no:
+      target: "Q57"
+  question: "In roughly which area(s) do these people Live? NOW CODE IF ANY ARE CLOSE ENOUGH FOR YOU TO VISIT"
+
+Q57:
+  question: "RECORD THE FOLLOWING INFORMATION AFTER THE INTERVIEW: 1) WAS ANY OTHER PERSON PRESENT DURING INTERVIEW"
+
+Q58:
+  question: "RECORD THE FOLLOWING INFORMATION AFTER THE INTERVIEW: DO YOU THINK THE RESPONDENT WAS GENERALLY HONEST IN THEIR ANSWERS?"
+
+#From here, we seem to be past the mainline questions. Could we be recording information from the booklets. Other information here includes things like weights used.
+
+Q100: #Let's just pick an arbitrary high number for now
+  start: 295 #or at least, that's the v-code
+  question: "Standard region"
+
+Q200:
+  start: 307 #again, that's the v-code
+  question: "Roughly how many different men have you had sex with in the last 12 months?"
+
+Q201:
+  question: "Roughly how many different men have you had sex with in the last 3 months?"
+
+Q202:
+  question: "Have you had sex with a male prostitute in the last 12 months?"
+
+Q203:
+  question: "Have you had sex with a male prostitute in the last 3 months?"
+
+Q204:
+  question: "Have you had sex with a man you know to be bisexual in the last 12 months?"
+
+Q205:
+  question: "Have you had sex with a man you know to be bisexual in the last 3 months?"
+
+Q206:
+  question: "Have you had sex with a man you know to be injecting drugs without medical supervision in the last 12 months?"
+
+Q207:
+  question: "Have you had sex with a man you know to be injecting drugs without medical supervision in the last 3 months?"
+
+Q208:
+  question: "Which of these sexual acts have you taken part in with a man even if only once in the last 12 months?"
+  answers:
+    A: 'Active anal sex - using a sheath'
+    B: 'Active anal sex - not using a sheath'
+    C: 'Passive anal sex - using a sheath'
+    D: 'Passive anal sex - not using a sheath'
+    E: 'Oral sex'
+    F: 'Masturbating someone'
+    G: 'Being masturbated'
+    H: 'DK/NS'
+
+Q209:
+  question: "Which of these sexual acts have you taken part in with a man even if only once in the last 3 months?"
+  answers:
+    A: 'Active anal sex - using a sheath'
+    B: 'Active anal sex - not using a sheath'
+    C: 'Passive anal sex - using a sheath'
+    D: 'Passive anal sex - not using a sheath'
+    E: 'Oral sex'
+    F: 'Masturbating someone'
+    G: 'Being masturbated'
+    H: 'DK/NS'
+
+Q210:
+  question: "Have you changed your sexual behaviour in any of these ways in the last 12 months?"
+  answers:
+    A: "Cut down on the number of sexual partners"
+    B: "Use sheaths more often when having sex"
+    C: "Cut down on anal sex"
+    D: "Cut down on having sex with people I don't know very well"
+    E: "Haven't made any of these changes"
+
+Q211:
+  question: "Have you changed your sexual behaviour in any of these ways in the last 3 months?"
+  answers:
+    A: "Cut down on the number of sexual partners"
+    B: "Use sheaths more often when having sex"
+    C: "Cut down on anal sex"
+    D: "Cut down on having sex with people I don't know very well"
+    E: "Haven't made any of these changes"
+    F: "DK/NS"
+
+Q212:
+  question: "Have you looked at any of these publications within the last couple of months?"
+  answers:
+    A: "Artemis"
+    B: "Capital Gay"
+    C: "Gay Times"
+    D: "Him"
+    E: "Mr."
+    F: "New Dimensions"
+    G: "Out"
+    H: "Zipper"
+    I: "Vulcan"
+    J: "None of these"
+    K: "DK/NS"
+
+Q213:
+  question: "Do you think of yourself as...?" #sexuality
+
+Q214:
+  branch: #funny modelling -- this is actually an option after Q213, rather than before Q214
+    condition: "IF YOU THINK OF YOURSELF AS HETEROSEXUAL, THANK YOU FOR YOUR HELP. PLEASE SEAL THIS BOOKLET IN ENVELOPE AND RETURN TO INTERVIEWER. IF YOU THINK OF YOURSELF AS BI-SEXUAL OR HOMOSEXUAL, PLEASE TURN TO QUESTION 9 ON NEXT PAGE."
+    yes:
+      label: "heterosexual"
+      target: "Q55"
+    no:
+      label: "bi- or homo-sexual"
+  question: "Of all the people who know you - friends, relatives or workmates - how many out of every 10 know that you are homosexual/bi-sexual?"
+
+Q215:
+  question: "How often do you personally visit 'Gay Pubs/Clubs' nowadays?"
+
+#I think I might be in a different booklet here. Maybe I guessed wrong as to what the last one was.
+Q300:
+  start: 366 #the v-code
+  question: "How many different partners of the opposite sex have you had in the last 12 months?"
+
+Q301:
+  start: 366 #the v-code
+  question: "How many different partners of the opposite sex have you had in the last 3 months?"
+
+Q302:
+  question: "Have you had sex with man whom you know to be bi-sexual in the last 12 months? (By a 'bisexual', we mwan someone who has sex with both mena and women)"
+
+Q303:
+  question: "Have you had sex with man whom you know to be bi-sexual in the last 3 months? (By a 'bisexual', we mwan someone who has sex with both mena and women)"
+
+Q304:
+  question: "Have you had sex with man whom you knew to be injecting drugs without medical supervision, in the last 12 months?"
+
+Q305:
+  question: "Have you had sex with man whom you knew to be injecting drugs without medical supervision, in the last 3 months?"
+
+Q306:
+  question: "Have you done any of the following with a man in the last 12 months, even if only once?"
+  answers:
+    A: "Normal Sex"
+    B: "Anal sex"
+    C: "Oral sex"
+    D: "Mutual masturbation"
+    E: "None"
+    F: "DK/NS"
+
+Q307:
+  question: "Have you done any of the following with a man in the last 3 months, even if only once?"
+  answers:
+    A: "Normal Sex"
+    B: "Anal sex"
+    C: "Oral sex"
+    D: "Mutual masturbation"
+    E: "None"
+    F: "DK/NS"
+
+Q308:
+  question: "Have you changed your sexual behaviour in any of these ways in the last few months?"
+  answers:
+    A: "Cut down on the number of sexual partners"
+    B: "Use sheaths (like Durex) more often when having sex"
+    C: "Cut down on anal sex"
+    D: "Cut down on having sex with people I don't know very well"
+    E: "Haven't made any of these changes"
+    F: "DK/NS"
+
+Q400: #another different booklet?
+  start: 399
+  question: "How many different partners of the opposite sex have you had in the last 12 months?"
+
+Q401:
+  question: "How many different partners of the opposite sex have you had in the last 3 months?"
+
+Q402:
+  question: "Have you had sex with a woman whom you know to be bi-sexual in the last 12 months? (By a 'bisexual', we mean someone who has sex with both men and women)"
+
+Q403:
+  question: "Have you had sex with a woman whom you know to be bi-sexual in the last 3 months? (By a 'bisexual', we mean someone who has sex with both men and women)"
+
+Q404:
+  question: "Have you had sex with a woman whom you knew to be injecting drugs without medical supervision in the last 12 months?"
+
+Q405:
+  question: "Have you had sex with a woman whom you knew to be injecting drugs without medical supervision in the last 3 months?"
+
+Q406:
+  question: "Have you done any of the following with a woman in the last 12 months, even if only once?"
+  answers:
+    A: "Normal Sex"
+    B: "Anal sex"
+    C: "Oral sex"
+    D: "Mutual masturbation"
+    E: "None of these"
+    F: "DK/NS"
+
+Q407:
+  question: "Have you done any of the following with a woman in the last 3 months, even if only once?"
+  answers:
+    A: "Normal Sex"
+    B: "Anal sex"
+    C: "Oral sex"
+    D: "Mutual masturbation"
+    E: "None of these"
+    F: "DK/NS"
+
+Q408:
+  question: "Have you changed your sexual behaviour in any of these ways in the last few months?"
+  answers:
+    A: "Cut down on the number of sexual partners"
+    B: "Use sheaths (like Durex) more often when having sex"
+    C: "Cut down on anal sex"
+    D: "Cut down on having sex with people I don't know very well"
+    E: "Haven't made any of these changes"
+    F: "DK/NS"
+
+Q409:
+  question: "Have you had sex with a female prostitute in the last 12 months?"
+
+Q410:
+  question: "Have you had sex with a female prostitute in the last 3 months?"
+
+
