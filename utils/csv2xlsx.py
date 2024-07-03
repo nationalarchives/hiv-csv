@@ -57,6 +57,7 @@ if __name__ == '__main__':
   parser.add_argument('--na-rep', default = None)
   parser.add_argument('--index-col', default = None, type = int)
   parser.add_argument('--float-format', default = None, type = str)
+  parser.add_argument('--separator', '--sep', default = None, type = str)
   args = parser.parse_args()
   engine_kwargs = {
     'mode': 'w',
@@ -72,4 +73,9 @@ if __name__ == '__main__':
   if not args.index_col is None:
     csv_kwargs['index_col'] = args.index_col
     to_excel_kwargs['index'] = True
+  if not args.separator is None:
+    if args.separator == 'TAB':
+      csv_kwargs['sep'] = '\t'
+    else:
+      csv_kwargs['sep'] = args.separator
   csvs2xslx(args.csvs, args.output, csv_kwargs, engine_kwargs, to_excel_kwargs)
