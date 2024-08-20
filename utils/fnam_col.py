@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 
+def n2a(n): #This function by Giancarlo Sportelli, https://stackoverflow.com/a/37604105
+  d, m = divmod(n, 26)
+  return '' if n < 0 else n2a(d - 1) + chr(m + 65)
+
 def f2c(field_name):
-  def n2a(n): #This function by Giancarlo Sportelli, https://stackoverflow.com/a/37604105
-    d, m = divmod(n, 26)
-    return '' if n < 0 else n2a(d - 1) + chr(m + 65)
   return n2a(int(field_name[1:]) - 1)
 
-def c2f(col_name):
+def c2i(col_name):
   def a2n(a, depth = 0):
     if len(a) == 0: return 0
     return (ord(a[-1]) - 64) * 26 ** depth + a2n(a[0:-1], depth + 1)
-  return f'V{a2n(col_name.upper())}'
+  return a2n(col_name.upper())
+
+def c2f(col_name):
+  return f'V{c2i(col_name)}'
 
 if __name__ == '__main__':
   import re
